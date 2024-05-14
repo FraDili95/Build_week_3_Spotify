@@ -2,3 +2,37 @@
 .sidebar-logo{
   width: 25px;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(0, 0, 0); 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(178, 178, 178); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(178, 178, 178); 
+}
+
+header i {
+  color: rgb(178, 178, 178);
+}
+
+.offcanvas{
+  background-color: rgb(0, 0, 0);
+  color: rgb(178, 178, 178);
+}
+
+/* LAVOROS SULLA SIDEBAR DI DESTRA */
+.offcanvas.offcanvas-end {
+  width: 20vw;
+}
