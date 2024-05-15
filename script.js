@@ -8,6 +8,10 @@ const BUTTON_RIGHT =document.getElementById("right");//BOTTONE AVANTI
 const PAGES = document.querySelectorAll(".page")//ARRAY CONTENENTE I PUNTATORI A TUTTE LE PAGINE
 const queenContainer = document.getElementById("queenContainer")//
 const sum41Container = document.getElementById("sum41Container")//
+const createPlaylist = document.getElementById("createPlaylist")//BOTTONE PER CREARE LA PLAYLIST
+const sidebarPlaylistList = document.getElementById("sidebarPlaylistList")//CONTENITORE DELLE PLAYLIST
+const createPlaylistForm = document.getElementById("createPlaylistForm")//FORM PER CREARE LE PLAYLIST
+const nameCreatePlaylist = document.getElementById("nameCreatePlaylist")//input in cui si inserisce il nome della playlist che si vuole aggingere
 const url = "http://striveschool-api.herokuapp.com/api/deezer/search?q=";
 var currentpage = 0;//PAGINA CORRENTE(la imposto a 0 all'inizio che corrisponde alla prima pagina)
 ///////////////////////////////////////////////////////////////////////////////////
@@ -44,8 +48,6 @@ async function fetchAlbum(nomeArtista) {
 
         const risultati = await response.json()
 
-        console.log(risultati);
-
         return risultati
     } catch (error) {
         //NAL CASO DI ERRORE LO SEGNALO
@@ -57,6 +59,9 @@ async function fetchAlbum(nomeArtista) {
 //CREO LA FUNZIONE PER GENERARE LE CARDS
 function createCards(risultati, container) {
     risultati.data.forEach(risultato => {
+        console.log(risultato);
+        console.log(risultato.album.tracklist);
+        console.log(risultato.artist.tracklist);
         const col = document.createElement("div");
         col.classList.add("col-3");
 
@@ -99,4 +104,26 @@ document.addEventListener("DOMContentLoaded", function caricamento() {
     fetchAlbum("sum41").then(risultati => {
         createCards(risultati, sum41Container)
     })
+
+    //CARICO LE PLAYLIST SALVATE NEL LOCAL STORAGE
+    sidebarPlaylistList.innerHTML =
+    `
+    ${localStorage.getItem("sidebarPlaylistList")}
+    `
+})
+
+//AGGIUNGO UN EVENTO PER CRARE LE PLAYLIST DA METTERE A SINISTRA
+createPlaylistForm.addEventListener("submit", function creaPlaylist(e) {
+    //EVITO L'EVENETO DI DEFAULT, QUINDI CHE SI RICARICHI LA PAGINA
+    e.preventDefault();
+
+    //CREO LA PLAYLIST COME ELEMENTO E GLI DO IL CONTENUTO E LO AGGIUNGO ALLA LISTA
+    const li = document.createElement("li");
+    li.innerText = nameCreatePlaylist.value ;
+    sidebarPlaylistList.appendChild(li)
+
+    //SALVO LA PLAYLIST ALLA LOCALSTORAGE PER SIMULARE CHE L'HO SALVATO
+    localStorage.setItem("sidebarPlaylistList", `${sidebarPlaylistList.innerHTML}`)
+    
+    nameCreatePlaylist.value = '';
 })

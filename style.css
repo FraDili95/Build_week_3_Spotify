@@ -196,3 +196,9 @@ footer >div >div >div.progress >div{
           line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+
+/* LAVORO SUL MODALE */
+.modal-content{
+  background-color: black;
+  color: white;
+}

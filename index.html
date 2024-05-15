@@ -23,7 +23,7 @@
           <i class="bi bi-journals me-3"></i>La tua libreria
         </div>
         <div>
-          <button class="btn text-white px-0 fs-4">
+          <button class="btn text-white px-0 fs-4" id="createPlaylist" data-bs-toggle="modal" data-bs-target="#modalPlaylist">
             <i class="bi bi-plus-square-fill me-3"></i>Crea playlist
           </button>
         </div>
@@ -37,105 +37,7 @@
       <hr>
       <div class="offcanvas-body ps-4">
         <ul id="sidebarPlaylistList">
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
-          <li>
-            prova
-          </li>
+          
         </ul>
       </div>
     </div>
@@ -408,8 +310,29 @@
   
 </main>
 
- <!----CONTENT-------------------------------------------------------------------------------->
-
+<!-- INSERISCO IL MODALE PER AGGIUNGERE LA PLAYLIST -->
+ <div class="modal fade" id="modalPlaylist" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Crea playlist</h1>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="createPlaylistForm">
+          <div>
+            <label for="name">Inerisci il nome della playlist</label>
+            <input type="text" id="nameCreatePlaylist" required class="form-control mt-3 " autocomplete="off"/>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+            <button type="submit" class="btn btn-success " id="createPlaylistButton" data-bs-dismiss="modal">Crea</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
   
  <!----FOOTER-------------------------------------------------------------------------------->
