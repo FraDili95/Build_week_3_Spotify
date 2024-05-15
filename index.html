@@ -146,23 +146,9 @@
 <main class="d-flex justify-content-between ">
 
   <!-- CONTENITORE DEL BOTTONE DELLA SIDEBAR DI DESTRA -->
-  <div class="position-absolute top-0" id="rightSidebarOpenerContainer">
-    <button class="btn" type="button" id="rightSidebarOpener"><i class="bi bi-three-dots text-white "></i></button>
-  </div>
-  
-  <!-- CONTENITORE DELLE DUE FRECCIE E DEL DROPDOWN MENU -->
-  <div class=" d-flex justify-content-between mx-5 align-items-center mb-4 position-absolute ">
-    <!-- INSERISCO IL CONENITORE CONTENENTE LE DUE FRECCIE -->
-    <div>
-      <button class="btn">
-        <i class="bi bi-chevron-left text-white" id="left"></i>
-      </button>
-      <button class="btn">
-        <i class="bi bi-chevron-right text-white " id="right"></i>
-      </button>
-    </div>
+  <div class="position-absolute top-0 d-flex" id="rightSidebarOpenerContainer">
     <!-- INSERISCO IL CONTENITORE CON IL DROPDOWN -->
-    <div class="dropdown position-absolute" id="dropdown">
+    <div class="dropdown" id="dropdown">
       <button class="btn dropdown-toggle text-white fw-bold btn-dark rounded-5 p-0 d-flex align-items-center pe-3 " type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownUser">
 
         <img src="https://picsum.photos/30/30" alt="" srcset="" class="rounded-5">
@@ -177,6 +163,24 @@
         <li><a class="dropdown-item" href="#">Something else here</a></li>
       </ul>
     </div>
+
+    <!-- BOTTONE PER APRIRE LA SIDEBAR DI DESTRA -->
+    <button class="btn" type="button" id="rightSidebarOpener"><i class="bi bi-three-dots text-white "></i></button>
+    
+  </div>
+  
+  <!-- CONTENITORE DELLE DUE FRECCIE E DEL DROPDOWN MENU -->
+  <div class=" d-flex justify-content-between mx-5 align-items-center mb-4 position-absolute ">
+    <!-- INSERISCO IL CONENITORE CONTENENTE LE DUE FRECCIE -->
+    <div>
+      <button class="btn">
+        <i class="bi bi-chevron-left text-white" id="left"></i>
+      </button>
+      <button class="btn">
+        <i class="bi bi-chevron-right text-white " id="right"></i>
+      </button>
+    </div>
+    
   </div>
 
   <div class="page pt-5 ">
