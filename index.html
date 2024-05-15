@@ -144,40 +144,42 @@
 <!-- TODO LE DUE FRECCIE SONO LE FIGLE DELL'ID "TEST NEL JS" -->
 
 <main class="d-flex justify-content-between ">
-  <div class="contenutoPrincipale">
-    <!-- CONTENITORE DEL BOTTONE DELLA SIDEBAR DI DESTRA -->
-    <div class="position-absolute top-0" id="rightSidebarOpenerContainer">
-      <button class="btn" type="button" id="rightSidebarOpener"><i class="bi bi-three-dots text-white "></i></button>
-    </div>
-    
-    <!-- CONTENITORE DELLE DUE FRECCIE E DEL DROPDOWN MENU -->
-    <div class=" d-flex justify-content-between mx-5 align-items-center mb-4 ">
-      <!-- INSERISCO IL CONENITORE CONTENENTE LE DUE FRECCIE -->
-      <div>
-        <button class="btn">
-          <i class="bi bi-chevron-left text-white" id="left"></i>
-        </button>
-        <button class="btn">
-          <i class="bi bi-chevron-right text-white " id="right"></i>
-        </button>
-      </div>
-      <!-- INSERISCO IL CONTENITORE CON IL DROPDOWN -->
-      <div class="dropdown">
-        <button class="btn dropdown-toggle text-white fw-bold btn-dark rounded-5 p-0 d-flex align-items-center pe-3 " type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownUser">
 
-          <img src="https://picsum.photos/30/30" alt="" srcset="" class="rounded-5">
-          <div class="d-inline-block mx-2 " id="dropdownUserName">
-            
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias itaque iste suscipit. Quidem, tempora maiores consectetur iste soluta dolorum. Labore!
-          </div>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div>
+  <!-- CONTENITORE DEL BOTTONE DELLA SIDEBAR DI DESTRA -->
+  <div class="position-absolute top-0" id="rightSidebarOpenerContainer">
+    <button class="btn" type="button" id="rightSidebarOpener"><i class="bi bi-three-dots text-white "></i></button>
+  </div>
+  
+  <!-- CONTENITORE DELLE DUE FRECCIE E DEL DROPDOWN MENU -->
+  <div class=" d-flex justify-content-between mx-5 align-items-center mb-4 position-absolute ">
+    <!-- INSERISCO IL CONENITORE CONTENENTE LE DUE FRECCIE -->
+    <div>
+      <button class="btn">
+        <i class="bi bi-chevron-left text-white" id="left"></i>
+      </button>
+      <button class="btn">
+        <i class="bi bi-chevron-right text-white " id="right"></i>
+      </button>
     </div>
+    <!-- INSERISCO IL CONTENITORE CON IL DROPDOWN -->
+    <div class="dropdown position-absolute" id="dropdown">
+      <button class="btn dropdown-toggle text-white fw-bold btn-dark rounded-5 p-0 d-flex align-items-center pe-3 " type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownUser">
+
+        <img src="https://picsum.photos/30/30" alt="" srcset="" class="rounded-5">
+        <div class="d-inline-block mx-2 " id="dropdownUserName">
+          
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias itaque iste suscipit. Quidem, tempora maiores consectetur iste soluta dolorum. Labore!
+        </div>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page pt-5 ">
 
     <!-- CONENITORE DEL "JUMBOTRON CON LA CANZONE DI SALMO E FEDEZ" -->
     <div class="px-0 py-3 text-center bg-dark mx-5 mb-3 ">
@@ -305,6 +307,8 @@
       
     </section>
 
+  </div>
+    
   </div>
 
   <!-- CONTENITORE DELLA SIDEBAR DI DESTRA -->

@@ -70,7 +70,7 @@ header i {
   color: rgb(178, 178, 178);
 }
 
-.contenutoPrincipale{
+.page{
   overflow: auto;
   max-height: 100vh;
 }
@@ -101,6 +101,10 @@ main{
 
 #dropdownUser{
   min-width: 130px;
+}
+
+#dropdown{
+  left: 65vw;
 }
 
 /* LAVORO SUL JUMBOTRON */
