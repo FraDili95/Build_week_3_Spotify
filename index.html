@@ -10,11 +10,9 @@
 </head>
 <body>
   <header>
-    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="bi bi-three-dots"></i></button>
-
-    <div class="offcanvas offcanvas-start fs-4 " data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-      <div class="offcanvas-header d-flex flex-column align-items-baseline">
-        <button type="button" class="btn px-0" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-three-dots"></i></button>
+    <div class="position-fixed fs-4" id="offcanvasScrolling">
+      <div class="offcanvas-header d-flex flex-column align-items-baseline ps-4">
+        <i class="bi bi-three-dots"></i>
         <div>
           <i class="bi bi-house-door-fill me-3"></i>Home
         </div>
@@ -37,7 +35,7 @@
         </div>
       </div>
       <hr>
-      <div class="offcanvas-body">
+      <div class="offcanvas-body ps-4">
         <ul id="sidebarPlaylistList">
           <li>
             prova
@@ -141,108 +139,249 @@
         </ul>
       </div>
     </div>
-    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>
+  </header>
 
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-      <div class="offcanvas-header d-flex justify-content-between ">
-        <h5 class="offcanvas-title" id="offcanvasRightLabel">Attività amici</h5>
-        <div>
-          <i class="bi bi-person-add fs-5 "></i>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
+<!-- TODO LE DUE FRECCIE SONO LE FIGLE DELL'ID "TEST NEL JS" -->
+
+<main class="d-flex justify-content-between ">
+  <div class="contenutoPrincipale">
+    <!-- CONTENITORE DEL BOTTONE DELLA SIDEBAR DI DESTRA -->
+    <div class="position-absolute top-0" id="rightSidebarOpenerContainer">
+      <button class="btn" type="button" id="rightSidebarOpener"><i class="bi bi-three-dots text-white "></i></button>
+    </div>
+    
+    <!-- CONTENITORE DELLE DUE FRECCIE E DEL DROPDOWN MENU -->
+    <div class=" d-flex justify-content-between mx-5 align-items-center mb-4 ">
+      <!-- INSERISCO IL CONENITORE CONTENENTE LE DUE FRECCIE -->
+      <div>
+        <button class="btn">
+          <i class="bi bi-chevron-left text-white"></i>
+        </button>
+        <button class="btn">
+          <i class="bi bi-chevron-right text-white"></i>
+        </button>
       </div>
-      <div class="offcanvas-body">
-        <div class="row mb-5">
-          <div class="col-3 d-flex justify-content-center px-0">
-            <i class="bi bi-person-circle fs-1 "></i>
+      <!-- INSERISCO IL CONTENITORE CON IL DROPDOWN -->
+      <div class="dropdown">
+        <button class="btn dropdown-toggle text-white fw-bold btn-dark rounded-5 p-0 d-flex align-items-center pe-3 " type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownUser">
+
+          <img src="https://picsum.photos/30/30" alt="" srcset="" class="rounded-5">
+          <div class="d-inline-block mx-2 " id="dropdownUserName">
+            
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias itaque iste suscipit. Quidem, tempora maiores consectetur iste soluta dolorum. Labore!
           </div>
-          <div class="col-7 px-0">
-            <h6 class="mb-1 fw-bold">
-              Charlie hookham
-            </h6>
-            <div>
-              <small>In camera · Yumi Zouma</small>
-            </div>
-            <div>
-              <i class="bi bi-disc"></i> EP III
-            </div>
-          </div>
-          <div class="col-2 px-0">
-           <small>4 ore</small>
-          </div>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CONENITORE DEL "JUMBOTRON CON LA CANZONE DI SALMO E FEDEZ" -->
+    <div class="px-0 py-3 text-center bg-dark mx-5 mb-3 ">
+      <div class="row gx-2 ">
+        <!-- CONTENITORE DELL'IMMAGINE -->
+        <div class="col-3 p-0 ">
+          <img src="https://picsum.photos/200/200" alt="" srcset="">
         </div>
-        <div class="row mb-5">
-          <div class="col-3 d-flex justify-content-center px-0">
-            <i class="bi bi-person-circle fs-1 "></i>
+        <!-- CONTENITORE DELLE SCRITTE -->
+        <div class="col-8 text-white text-start px-0 ">
+          <div class="fw-bold">
+            ALBUM
           </div>
-          <div class="col-7 px-0">
-            <h6 class="mb-1 fw-bold">
-              Charlie hookham
-            </h6>
-            <div>
-              <small>In camera · Yumi Zouma</small>
-            </div>
-            <div>
-              <i class="bi bi-disc"></i> EP III
-            </div>
+          <div class="titolo-jumbotron fw-bold ">
+            VIOLA(feat.Salmo)
           </div>
-          <div class="col-2 px-0">
-           <small>4 ore</small>
+          <div class="mb-2">
+            Fedez, Salmo
           </div>
-        </div>
-        <div class="row">
-          <div class="col-3 d-flex justify-content-center px-0">
-            <i class="bi bi-person-circle fs-1 "></i>
+          <div class="mb-2 ">
+            Ascolta il nuovo singolo di Fedez e Salmo!
           </div>
-          <div class="col-7 px-0">
-            <h6 class="mb-1 fw-bold">
-              Charlie hookham
-            </h6>
-            <div>
-              <small>In camera · Yumi Zouma</small>
-            </div>
-            <div>
-              <i class="bi bi-disc"></i> EP III
-            </div>
-          </div>
-          <div class="col-2 px-0">
-           <small>4 ore</small>
+          <div>
+            <button class="btn btn-success btn-lg rounded-5 text-black fw-bold px-4 fs-6 ">Play</button>
+            <button class="btn btn-outline-light rounded-5 fw-bold px-4 fs-6 ">Salva</button>
+            <button class="btn text-secondary "><i class="bi bi-three-dots fw-bold fs-1"></i></button>
           </div>
         </div>
       </div>
     </div>
-  </header>
-  <div class=" position-absolute top-0 display-2" style="left: 45%;" id="TEST">
-    <i class="bi bi-arrow-left-circle"></i>
-    <i class="bi bi-arrow-right-circle"></i>
+
+    <!-- Inserisco la sezione "Buonasera" -->
+    <section class="mx-5">
+      <h3 class="fw-bold mb-4 ">
+        Buonasera
+      </h3>
+      <div>
+        <div class="row g-3 " id="buonaseraContainer">
+          <div class="col-4 px-0 mt-0 ">
+            <div class="card mb-3 px-0 border-0 bg-dark text-bg-dark mx-3">
+              <div class="row g-0">
+                <div class="col-2">
+                  <img src="https://picsum.photos/75/75" alt="...">
+                </div>
+                <div class="col-10 align-items-center d-flex">
+                  <div class="card-body pe-0 ">
+                    <h5 class="card-title fs-6 mb-2">early stage emily syndrome (sett-ott 2022)</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 px-0 mt-0  ">
+            <div class="card mb-3 px-0 border-0 bg-dark text-bg-dark mx-3">
+              <div class="row g-0">
+                <div class="col-2">
+                  <img src="https://picsum.photos/75/75" alt="...">
+                </div>
+                <div class="col-10 align-items-center d-flex">
+                  <div class="card-body pe-0 ">
+                    <h5 class="card-title fs-6 mb-0">Be The Young</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 px-0 mt-0  ">
+            <div class="card mb-3 px-0 border-0 bg-dark text-bg-dark mx-3">
+              <div class="row g-0">
+                <div class="col-2">
+                  <img src="https://picsum.photos/75/75" alt="...">
+                </div>
+                <div class="col-10 align-items-center d-flex">
+                  <div class="card-body pe-0 ">
+                    <h5 class="card-title fs-6 mb-0">saggio vibes</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 px-0 mt-0  ">
+            <div class="card mb-3 px-0 border-0 bg-dark text-bg-dark mx-3">
+              <div class="row g-0">
+                <div class="col-2">
+                  <img src="https://picsum.photos/75/75" alt="...">
+                </div>
+                <div class="col-10 align-items-center d-flex">
+                  <div class="card-body pe-0 ">
+                    <h5 class="card-title fs-6 mb-0">Brani che ti piacciono</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 px-0 mt-0  ">
+            <div class="card mb-3 px-0 border-0 bg-dark text-bg-dark mx-3">
+              <div class="row g-0">
+                <div class="col-2">
+                  <img src="https://picsum.photos/75/75" alt="...">
+                </div>
+                <div class="col-10 align-items-center d-flex">
+                  <div class="card-body pe-0 ">
+                    <h5 class="card-title fs-6 mb-0">2021 lol</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 px-0 mt-0  ">
+            <div class="card mb-3 px-0 border-0 bg-dark text-bg-dark mx-3">
+              <div class="row g-0">
+                <div class="col-2">
+                  <img src="https://picsum.photos/75/75" alt="...">
+                </div>
+                <div class="col-10 align-items-center d-flex">
+                  <div class="card-body pe-0">
+                    <h5 class="card-title fs-6 mb-0">Deep Dive with Ali Abdaal</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>       
+        </div>
+      </div>
+      
+    </section>
+
   </div>
+
+  <!-- CONTENITORE DELLA SIDEBAR DI DESTRA -->
+  <div id="rightSidebar" class="right-sidebar me-0 d-none position-sticky">
+    <div class="d-flex justify-content-between mb-4 pt-3 ps-3">
+      <h5 class="fw-bold text-white">Attività amici</h5>
+      <div>
+        <i class="bi bi-person-add fs-5 "></i>
+        <button type="button" class="btn-close btn-close-white" id="rightSidebarCloser"></button>
+      </div>
+    </div>
+    <div>
+      <div class="d-flex mb-4 ">
+        <div class="d-flex justify-content-center px-0 mx-3">
+          <i class="bi bi-person-circle fs-2 "></i>
+        </div>
+        <div class="px-0">
+          <h6 class=" mb-0 fw-bold">
+            Charlie hookham
+          </h6>
+          <div>
+            <small class="small-sidebar-right">In camera · Yumi Zouma</small">
+          </div>
+          <div>
+            <i class="bi bi-disc"></i> EP III
+          </div>
+        </div>
+        <div class="px-0 ms-4">
+          <small class="small-sidebar-right">4 ore</small>
+        </div>
+      </div>
+      <div class="d-flex mb-4 ">
+        <div class="d-flex justify-content-center px-0 mx-3">
+          <i class="bi bi-person-circle fs-2 "></i>
+        </div>
+        <div class="px-0">
+          <h6 class=" mb-0 fw-bold">
+            Charlie hookham
+          </h6>
+          <div>
+            <small class="small-sidebar-right">In camera · Yumi Zouma</small">
+          </div>
+          <div>
+            <i class="bi bi-disc"></i> EP III
+          </div>
+        </div>
+        <div class="px-0 ms-4">
+          <small class="small-sidebar-right">4 ore</small>
+        </div>
+      </div>
+      <div class="d-flex mb-4 ">
+        <div class="d-flex justify-content-center px-0 mx-3">
+          <i class="bi bi-person-circle fs-2 "></i>
+        </div>
+        <div class="px-0">
+          <h6 class=" mb-0 fw-bold">
+            Charlie hookham
+          </h6>
+          <div>
+            <small class="small-sidebar-right">In camera · Yumi Zouma</small">
+          </div>
+          <div>
+            <i class="bi bi-disc"></i> EP III
+          </div>
+        </div>
+        <div class="px-0 ms-4">
+          <small class="small-sidebar-right">4 ore</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</main>
+
  <!----CONTENT-------------------------------------------------------------------------------->
- <div id="content" class="container-fluid">
-  <div id="home" class="page" style="min-height: 100vh; min-width: 100%; background-color: blueviolet;">
-    <h1>Home</h1>
-    <p>Benvenuto nella pagina Home.</p>
-  </div>
-  <div id="search" class="page d-none" style="min-height: 100vh; min-width: 100%; background-color: rgb(43, 226, 86);">
-    <h1>Cerca</h1>
-    <p>Questa è la pagina di ricerca.</p>
-  </div>
-  <div id="library" class="page d-none" style="min-height: 100vh; min-width: 100%; background-color: rgb(55, 43, 226);">
-    <h1>La tua libreria</h1>
-    <p>Questa è la tua libreria.</p>
-  </div>
-  <div id="page1" class="page d-none" style="min-height: 100vh; min-width: 100%; background-color: rgb(226, 43, 76);">
-    <h1>Prova 1</h1>
-    <p>Contenuto della pagina di prova 1.</p>
-  </div>
-  <div id="page2" class="page d-none" style="min-height: 100vh; min-width: 100%; background-color: rgb(226, 76, 43);">
-    <h1>Prova 2</h1>
-    <p>Contenuto della pagina di prova 2.</p>
-  </div>
-  <div id="page3" class="page d-none" style="min-height: 100vh; min-width: 100%; background-color: rgb(37, 5, 67);">
-    <h1>Prova 3</h1>
-    <p>Contenuto della pagina di prova 3.</p>
-  </div>
-</div>
+ <!-- TODO AD OGNI PARTE CENTRALE AGGIUNGAMO LA CLASSE "PAGE" -->
+
   
  <!----FOOTER-------------------------------------------------------------------------------->
 <footer id="footer" class="row fixed-bottom ">

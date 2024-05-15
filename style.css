@@ -1,8 +1,10 @@
-/* lAVORO SULLA SIDEBAR DI SINISTRA */
-.sidebar-logo{
-  width: 25px;
+/* LAVORO SUL BODY */
+body{
+  height: 100vh;
+  background-image: linear-gradient(to bottom, #222, #000);
 }
 
+/* LAVORO SULLE SCROLLBARS DELLA PAGINA*/
 /* width */
 ::-webkit-scrollbar {
   width: 15px;
@@ -10,7 +12,7 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: rgb(0, 0, 0); 
+  background: transparent; 
 }
  
 /* Handle */
@@ -23,20 +25,105 @@
   background: rgb(178, 178, 178); 
 }
 
+/* lAVORO SULLA SIDEBAR DI SINISTRA */
+#offcanvasScrolling{
+  width: 20vw;
+}
+
+.sidebar-logo{
+  width: 25px;
+}
+
+#sidebarPlaylistList{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#sidebarPlaylistList li{
+  font-size: 1.2rem;
+}
+
 header i {
   color: rgb(178, 178, 178);
 }
 
-.offcanvas{
+#offcanvasScrolling{
+  background-color: rgb(0, 0, 0);
+  color: rgb(178, 178, 178);
+  height: 100vh;
+}
+
+#offcanvasScrolling .offcanvas-body{
+  overflow: auto;
+  max-height: 60vh;
+}
+
+/* LAVOROS SULLA SIDEBAR DI DESTRA */
+.right-sidebar{
+  min-width: 13vw;
+  height: 100vh;
+}
+
+.right-sidebar{
   background-color: rgb(0, 0, 0);
   color: rgb(178, 178, 178);
 }
 
-/* LAVOROS SULLA SIDEBAR DI DESTRA */
-.offcanvas.offcanvas-end {
-  width: 20vw;
+.contenutoPrincipale{
+  overflow: auto;
+  max-height: 100vh;
 }
 
+.small-sidebar-right{
+  font-size: 0.7rem;
+}
+
+#rightSidebarOpenerContainer{
+  right: 20px;
+}
+
+/* LAVORO AL MAIN */
+main{
+  overflow: auto;
+  background-color: rgb(28, 28, 28);
+  color: white;
+  margin-left: 20vw;
+}
+
+/* LAVORO NEL CONTENITORE IN CUI CI SONO LE FRECCIE ED IL DROPDOWN DELL'UTENTE */
+#dropdownUserName{
+  width: 95px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#dropdownUser{
+  min-width: 130px;
+}
+
+/* LAVORO SUL JUMBOTRON */
+.titolo-jumbotron{
+  font-size: 3rem;
+}
+
+/* LAVORO NELLE CARD NEL CONENITORE BUONASERA */
+#buonaseraContainer .card{
+  min-width: 350px;
+}
+#buonaseraContainer .card .col-2 img{
+  width: 100%;
+  height: 100%;
+}
+
+.card-body{
+  min-height: 80px;
+}
+
+.card-title{
+  max-width: 230px;
+}
 /********************/
 /*FOOTER (PLAY, ECC)*/
 /********************/

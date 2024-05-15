@@ -1,4 +1,7 @@
 //////////////////COSTANTI E VARIABILI GLOBALI///////////////////////////////////
+const rightSidebarOpener = document.getElementById("rightSidebarOpener");//PUNTINI CHE APRONO LA SIDEBAR DI DESTRA
+const rightSidebarCloser = document.getElementById("rightSidebarCloser");//BOTTONE CHE CHIUDE LA SIDEBAR DI DESTRA
+const rightSidebar = document.getElementById("rightSidebar");//COSTANTE PER LA SIDEBAR DI DESTRA
 const RIGHT = -2000; const LEFT = -1000;
 const BUTTON_LEFT = document.getElementById("TEST").firstElementChild;//BOTTONE INDIETRO
 const BUTTON_RIGHT = document.getElementById("TEST").lastElementChild;//BOTTONE AVANTI
@@ -28,6 +31,18 @@ function changePage ( arrayPages, direction ){//PER FARLA FUNZIONARE SERVE SOLO 
 
 }//fine funz
 
+
 ////////////////////////////////EVENT LISTENERS///////////////////////////////////
 BUTTON_LEFT.addEventListener("click",function(){  changePage(PAGES, LEFT); } );//bottone sx
 BUTTON_RIGHT.addEventListener("click",function(){ changePage(PAGES, RIGHT); } );//bottone destro
+
+//EVENTI PER FAR APPARIRE E SCOMPARIRE LA SIDEBAR DI DESTRA
+rightSidebarOpener.addEventListener("click", function openRightSidebar() {
+    rightSidebar.classList.remove("d-none")
+    rightSidebarOpener.classList.add("d-none")
+})
+  
+rightSidebarCloser.addEventListener("click", function openRightSidebar() {
+    rightSidebar.classList.add("d-none")
+    rightSidebarOpener.classList.remove("d-none")
+})
