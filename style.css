@@ -36,3 +36,56 @@ header i {
 .offcanvas.offcanvas-end {
   width: 20vw;
 }
+
+/********************/
+/*FOOTER (PLAY, ECC)*/
+/********************/
+/*seleziona l'intero footer*/
+#footer{
+  min-height: 5.5rem;
+  background-color: #181818;
+  color: #BABABA;
+}
+/*----------*/
+/*seleziona la finta barra progresso canzone*/
+div.progress.w-50{
+  margin-top: 0.4em;
+  max-height: 4px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+/*----------*/
+/*seleziona tutte le icone*/
+footer >div >div i{
+  font-size: 1.5em;
+} 
+/*----------*/
+/*seleziona solo le icone verdi*/
+footer >div.col-8 >div i:first-child, footer >div.col-8 >div i:last-child{
+  color: rgb(31, 167, 78);
+}
+/*----------*/
+/*seleziona le icone della parte destra*/
+footer >div:last-child i{
+  font-size: 1.2em;
+}
+/*----------*/
+/*seleziona solo l'icona del volume(perchè veniva piccola)*/
+footer >div:last-child i.bi-volume-down{
+  font-size: 2em;
+}
+/*----------*/
+/*seleziona la barra volume delle icone a dx*/
+#sound_indicator{
+  background-color: #FFFFFF;
+  border-radius: 15px;
+  height: 0.2em;
+  width: 4.5em;
+}
+/*----------*/
+/*seleziona la parte bianca della finta barra progresso iniziale*/
+footer >div >div >div.progress >div{
+  background-color: #FFFFFF;
+  height: 100%;
+  width: 35%;
+  border-radius: 15px;
+}
