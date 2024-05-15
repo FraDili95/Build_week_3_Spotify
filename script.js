@@ -3,8 +3,8 @@ const rightSidebarOpener = document.getElementById("rightSidebarOpener");//PUNTI
 const rightSidebarCloser = document.getElementById("rightSidebarCloser");//BOTTONE CHE CHIUDE LA SIDEBAR DI DESTRA
 const rightSidebar = document.getElementById("rightSidebar");//COSTANTE PER LA SIDEBAR DI DESTRA
 const RIGHT = -2000; const LEFT = -1000;
-const BUTTON_LEFT = document.getElementById("TEST").firstElementChild;//BOTTONE INDIETRO
-const BUTTON_RIGHT = document.getElementById("TEST").lastElementChild;//BOTTONE AVANTI
+const BUTTON_LEFT = document.getElementById("left");//BOTTONE INDIETRO
+const BUTTON_RIGHT =document.getElementById("right");//BOTTONE AVANTI
 const PAGES = document.querySelectorAll(".page")//ARRAY CONTENENTE I PUNTATORI A TUTTE LE PAGINE
 var currentpage = 0;//PAGINA CORRENTE(la imposto a 0 all'inizio che corrisponde alla prima pagina)
 ///////////////////////////////////////////////////////////////////////////////////
