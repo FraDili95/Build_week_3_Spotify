@@ -220,22 +220,31 @@ footer >div >div >div.progress >div{
   color: white;
   width: 80vw;
 
- 
-}
+ }
 
 .icon-blue {
   color: #68a9ef; 
   font-size: 22px;
 }
 
-
-
 .icon-play {
   color: #57be55; 
-  font-size: 60px;
+  font-size: 50px;
+  cursor: pointer;
 }
 
 .icon-dots {
   color: #cacaca; 
   font-size: 20px;
+}
+
+.icon {
+  font-size: 2rem;
+  transition: color 0.3s, transform 0.3s;
+  
+}
+
+.icon-play:hover {
+  color: #f7f7f7; 
+  transform: scale(1.1); 
 }
