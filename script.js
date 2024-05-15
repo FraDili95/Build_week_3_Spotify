@@ -6,7 +6,8 @@ const RIGHT = -2000; const LEFT = -1000;
 const BUTTON_LEFT = document.getElementById("left");//BOTTONE INDIETRO
 const BUTTON_RIGHT =document.getElementById("right");//BOTTONE AVANTI
 const PAGES = document.querySelectorAll(".page")//ARRAY CONTENENTE I PUNTATORI A TUTTE LE PAGINE
-const albumsContainer = document.getElementById("albumsContainer")//
+const queenContainer = document.getElementById("queenContainer")//
+const sum41Container = document.getElementById("sum41Container")//
 const url = "http://striveschool-api.herokuapp.com/api/deezer/search?q=";
 var currentpage = 0;//PAGINA CORRENTE(la imposto a 0 all'inizio che corrisponde alla prima pagina)
 ///////////////////////////////////////////////////////////////////////////////////
@@ -52,28 +53,28 @@ async function fetchAlbum(nomeArtista) {
     }
 }
 
-// fetchAlbum("queen").then(risultati => {
-//     risultati.data.forEach(risultato => {
-//         console.log(risultato);
-//         const col = document.createElement("div");
-//         col.classList.add("col-3");
 
-//         col.innerHTML =
-//         `
-//         <div class="card" style="width: 18rem;">
-//         <img src="${risultato.album.cover}" class="card-img-top" alt="...">
-//         <div class="card-body">
-//             <h5 class="card-title">${risultato.album.title}</h5>
-//             <p class="card-text">${risultato.artist.name}</p>
-//             <a href="#" class="btn btn-primary">Go somewhere</a>
-//         </div>
-//         </div>
-//         `
-//         albumsContainer.appendChild(col);
+//CREO LA FUNZIONE PER GENERARE LE CARDS
+function createCards(risultati, container) {
+    risultati.data.forEach(risultato => {
+        const col = document.createElement("div");
+        col.classList.add("col-3");
 
+        col.innerHTML =
+        `
+        <div class="card border-0" style="width: 18rem;">
+        <img src="${risultato.album.cover}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title fw-bold text-white">${risultato.album.title}</h5>
+            <p class="text-white fs-5">${risultato.title}</p>
+            <a class="card-text fw-bold">${risultato.artist.name}</a>
+        </div>
+        </div>
+        `
+        container.appendChild(col)
 
-//     });
-// })
+    });
+}
 
 ////////////////////////////////EVENT LISTENERS///////////////////////////////////
 BUTTON_LEFT.addEventListener("click",function(){  changePage(PAGES, LEFT); } );//bottone sx
@@ -88,4 +89,14 @@ rightSidebarOpener.addEventListener("click", function openRightSidebar() {
 rightSidebarCloser.addEventListener("click", function openRightSidebar() {
     rightSidebar.classList.add("d-none")
     rightSidebarOpener.classList.remove("d-none")
+})
+
+//AGGIUNGO UN EVENTO AL CARICAMENTO DELLA PAGINA
+document.addEventListener("DOMContentLoaded", function caricamento() {
+    fetchAlbum("queen").then(risultati => {
+        createCards(risultati, queenContainer)
+    })
+    fetchAlbum("sum41").then(risultati => {
+        createCards(risultati, sum41Container)
+    })
 })
