@@ -83,6 +83,10 @@ header i {
   right: 20px;
 }
 
+#rightSidebar{
+  z-index: 20;
+}
+
 /* LAVORO AL MAIN */
 main{
   overflow: auto;
