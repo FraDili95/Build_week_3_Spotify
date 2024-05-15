@@ -89,11 +89,13 @@ BUTTON_RIGHT.addEventListener("click",function(){ changePage(PAGES, RIGHT); } );
 rightSidebarOpener.addEventListener("click", function openRightSidebar() {
     rightSidebar.classList.remove("d-none")
     rightSidebarOpener.classList.add("d-none")
+    customJumbotron.style.width="67vw"
 })
   
 rightSidebarCloser.addEventListener("click", function openRightSidebar() {
     rightSidebar.classList.add("d-none")
     rightSidebarOpener.classList.remove("d-none")
+    customJumbotron.style.width="80vw"
 })
 
 //AGGIUNGO UN EVENTO AL CARICAMENTO DELLA PAGINA
@@ -127,3 +129,6 @@ createPlaylistForm.addEventListener("submit", function creaPlaylist(e) {
     
     nameCreatePlaylist.value = '';
 })
+
+ //CREAIAMO LA VARIABILE DEL JUMBOTRON ARTISTA
+ const customJumbotron=document.querySelector(".custom-jumbotron")

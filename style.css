@@ -211,3 +211,31 @@ footer >div >div >div.progress >div{
   background-color: black;
   color: white;
 }
+
+/* LAVORO SU PAGINA ARTISTA */
+.custom-jumbotron {
+  background-image: url('bw3/yellow3.webp');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  width: 80vw;
+
+ 
+}
+
+.icon-blue {
+  color: #68a9ef; 
+  font-size: 22px;
+}
+
+
+
+.icon-play {
+  color: #57be55; 
+  font-size: 60px;
+}
+
+.icon-dots {
+  color: #cacaca; 
+  font-size: 20px;
+}
