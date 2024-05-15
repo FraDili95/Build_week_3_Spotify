@@ -97,10 +97,15 @@ main{
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+
 }
 
 #dropdownUser{
   min-width: 130px;
+}
+
+#dropdown, #freccie{
+  z-index: 10;
 }
 
 
