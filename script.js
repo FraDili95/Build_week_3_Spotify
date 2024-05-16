@@ -206,3 +206,53 @@ createPlaylistForm.addEventListener("submit", function creaPlaylist(e) {
 
  //CREAIAMO LA VARIABILE DEL JUMBOTRON ARTISTA
  const customJumbotron=document.querySelector(".custom-jumbotron")
+
+ /*JS mihajlo */
+ /* Aggiungo .addEventListener a window per gestire il responsive*/
+window.addEventListener('resize', function(){
+    // Scrivo una variabile per la larghezza dello schermo
+    let width = window.innerWidth;
+    let tableTracks = document.querySelector('.table-tracks');
+    let tableContainer = document.getElementById('table-container');
+    
+    // Se lo schermo è di grandi dimensioni
+    if(width >= 992) {
+        tableTracks.style.display = 'table';
+        tableTracks.style.animation = 'shrinkLG 1s forwards';
+    }
+    // Se lo schermo è di medie dimensioni
+    else if(width > 767 && width < 992) {
+        tableTracks.style.display = 'table';
+        tableTracks.style.animation = 'shrinkMD 1s forwards';
+    }
+    // Se lo schermo è di piccole dimensioni
+    else if(width <= 767) {
+        tableTracks.style.display = 'none';
+        tableContainer.innerHTML = 
+        `
+        <div class="sm-track-list">
+            <div class="sm-container-track-list">
+                <button type="button" class="sm-btn-track-list">
+                    First button
+                    <small>first button</small>
+                </button>
+                <span><i class="bi bi-three-dots-vertical"></i></span>
+            </div>
+            <div>
+                <button type="button" class="sm-btn-track-list">
+                    First button
+                    <small>first button</small>
+                </button>
+                <span><i class="bi bi-three-dots-vertical"></i></span>
+            </div>
+            <div>
+                <button type="button" class="sm-btn-track-list">
+                    First button
+                    <small>first button</small>
+                </button>
+                <span><i class="bi bi-three-dots-vertical"></i></span>
+            </div>
+        </div>
+        `;
+    }
+})

@@ -269,3 +269,94 @@ footer >div >div >div.progress >div{
   scale: 1.01;
   cursor: pointer;
 }
+
+/*CSS mihajlo*/
+.main-container{
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.container-album{
+  display: flex;
+  justify-content: center;
+  height: 60%;
+  background-image: linear-gradient(to bottom, rgb(228, 196, 82), rgba(204, 174, 71));
+}
+.card-album{
+  width: 60%;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  margin-top: 4%;
+}
+.img-card-album{
+  width: 100%;
+  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.5);
+}
+
+.container-tracks{
+  position: absolute;
+  bottom: -20%;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgb(0, 0, 0), rgb(0, 0, 0), rgb(0, 0, 0), rgb(0, 0, 0), rgb(0, 0, 0));
+  height: 75%;
+  width: 100%;
+  color: rgb(245, 245, 245);
+}
+.icons-container{
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  width: 52%;
+  padding: 4px 0;
+  margin: 20px 0;
+  font-size: 30px;
+}
+.play-icon-container{
+  width: 40px;
+  background-color: rgb(30, 215, 96);
+  border-radius: 100%;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+#table-container{
+  display: flex;
+  justify-content: center;
+}
+.table-tracks{
+  width: 920px;
+}
+.table-tracks th, .table-tracks td{
+  padding-right: 30px;
+}
+
+.sm-track-list{
+  display: flex;
+  flex-direction: column;
+}
+
+.sm-btn-track-list{
+  color: rgb(245, 245, 245);
+  background-color: transparent;
+}
+/* Animazione per lo schermo di grandi dimensioni*/
+@keyframes shrinkLG {
+  from {
+      width: 640px;
+  }
+  to {
+      width: 920px;
+  }
+}
+
+/* Animazione per lo schermo di medie dimensioni*/
+@keyframes shrinkMD {
+  from {
+      width: 920px;
+  }
+  to {
+      width: 640px;
+  }
+}
+
+@media (max-width: 768px) {
+  /*smartphone*/
+}
