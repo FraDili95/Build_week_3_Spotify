@@ -80,13 +80,31 @@ async function fetchAlbum(nomeArtista) {
         console.error("Errore:", error)
     }
 }
+// FETCH ALBUM tracks
+async function fetchAlbumTraks(url_new_API) {
+    try {
+        const response = await fetch(url_new_API,{
+            method: 'GET',
+            mode:'no-cors',
+            headers: { 'Content-Type': 'application/json' }
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const risultati = await response.json();
+        console.log("Fetch album tracks results:", risultati);
+        return risultati;
+    } catch (error) {
+        console.error("Errore:", error);
+    }
+}
 
 
 //CREO LA FUNZIONE PER GENERARE LE CARDS
 function createCards(risultati, container, addButton) {
     risultati.data.forEach(risultato => {
         console.log("RISULTATO",risultato);
-        console.log(risultato.album.tracklist);
+        console.log("TRACKLIST",risultato.album.tracklist);
         console.log(risultato.artist.tracklist);
         const col = document.createElement("div");
         col.classList.add("col-3");
@@ -103,10 +121,16 @@ function createCards(risultati, container, addButton) {
             <p class="text-white fs-5">${risultato.title}</p>
             <a class="card-text fw-bold">${risultato.artist.name}</a>
         </div>
+        <a class="d-none fetch_album ">${risultato.album.id}</a>
         </div>
         `
         // Aggiungo gli event listener subito dopo aver creato la carta(SOLO SE SPECIFICATO DURANTE LA CHIAMATA)
         if( addButton ){
+            col.querySelector('img').addEventListener("click", function(){
+                const prova = `https://api.deezer.com/album/${col.querySelector('.fetch_album').textContent}/tracks`;
+                console.log(prova);
+                console.log( fetchAlbumTraks(prova) );
+            })
             col.addEventListener('mouseenter', startHover);//evento entra il mouse
             col.addEventListener('mouseleave', endHover);//evento esce il mouseif( !(col.classList.contains("favourite")) ){//se non è già stato inserito nei preferiti
                 col.firstElementChild.firstElementChild.addEventListener("click", function(){
