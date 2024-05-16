@@ -248,3 +248,24 @@ footer >div >div >div.progress >div{
   color: #f7f7f7; 
   transform: scale(1.1); 
 }
+/*********************************/
+.button_casual{
+  background-color: #f7f7f7;
+   border-radius: 5em;
+}
+.text-white.button_casual{
+   background-color:  rgb(28, 28, 28);
+}
+.text-white.button_casual:hover{
+  background-color: rgb(53, 53, 53);
+  border-radius: 25em;
+}
+.button_casual i {
+ font-size: 1.3em;
+}
+
+.button_casual:hover{
+  background-color: rgb(217, 217, 217);
+  scale: 1.01;
+  cursor: pointer;
+}
