@@ -1,4 +1,5 @@
 //////////////////COSTANTI E VARIABILI GLOBALI///////////////////////////////////
+const BUTTON_HOME = document.getElementById("home");//puntatore al bottone home
 const numOfFavouritePunct = document.getElementsByClassName("num_song");//puntatori alle posizioni che indicano il numero dei preferiti
 const toFavourite = document.getElementsByClassName("favourites");//puntatori ai bottoni che portano ai preferiti
 const rightSidebarOpener = document.getElementById("rightSidebarOpener");//PUNTINI CHE APRONO LA SIDEBAR DI DESTRA
@@ -18,11 +19,13 @@ const nameCreatePlaylist = document.getElementById("nameCreatePlaylist")//input 
 const url = "http://striveschool-api.herokuapp.com/api/deezer/search?q=";
 var currentpage = 0;//PAGINA CORRENTE(la imposto a 0 all'inizio che corrisponde alla prima pagina)
 var currentFavourites = [];//array globale contenente i PREFERITI
+var onFavourite = false;
 ///////////////////////////////////////////////////////////////////////////////////
 
+
 function changePage ( arrayPages, direction ){//PER FARLA FUNZIONARE SERVE SOLO AGGIUNGERE LA CLASSE page AD OGNI PAGINA(e gli eventi ai bottoni)
+    
     const hideClassInCurrent = () => { arrayPages[currentpage].classList.add("d-none"); };
-    let onFavourite = false;
     // 1)nasconde pagina corrente 
     // 2)definisce il comportamento della funzione in base al valore di direction(impostato durante la chiamata)
     if( direction == LEFT && currentpage > 0 ){// se LEFT e non sono a pag 0, scorre indietro
@@ -38,13 +41,13 @@ function changePage ( arrayPages, direction ){//PER FARLA FUNZIONARE SERVE SOLO 
             document.querySelector(".special_page").classList.remove("d-none");//mostro pagina preferiti
             document.getElementById("left").classList.add("d-none");//nascondo BOTTONE INDIETRO
             document.getElementById("right").classList.add("d-none");//nascondo BOTTONE AVANTI
-            document.getElementById("home").addEventListener("click", changePage(arrayPages, TO_FAVOURITE)) 
         }else{
             onFavourite = false;//pagina preferiti spenta
             document.querySelector(".special_page").classList.add("d-none");//nascondo pagina preferiti
+            document.getElementById("left").classList.remove("d-none");//nascondo BOTTONE INDIETRO
+            document.getElementById("right").classList.remove("d-none");//nascondo BOTTONE AVANTI
             currentpage = 0;
             arrayPages[currentpage].classList.remove("d-none");
-            document.getElementById("home").removeEventListener("click", changePage(arrayPages, TO_FAVOURITE))
         }
       
     }else{
@@ -148,6 +151,14 @@ BUTTON_RIGHT.addEventListener("click",function(){ changePage(PAGES, RIGHT); } );
 Array.from(toFavourite).forEach(puntatore => {
     puntatore.addEventListener("click",function(){  changePage(PAGES, TO_FAVOURITE); } )//bottoni "alla pag preferiti"
 });
+BUTTON_HOME.addEventListener("click", function(){
+    if(onFavourite){
+        changePage(PAGES, TO_FAVOURITE);
+    }else{
+        currentpage = 1;
+        changePage(PAGES, LEFT);
+    }
+})
 //EVENTI PER FAR APPARIRE E SCOMPARIRE LA SIDEBAR DI DESTRA
 rightSidebarOpener.addEventListener("click", function openRightSidebar() {
     rightSidebar.classList.remove("d-none")
@@ -186,7 +197,7 @@ createPlaylistForm.addEventListener("submit", function creaPlaylist(e) {
     const li = document.createElement("li");
     li.innerText = nameCreatePlaylist.value ;
     sidebarPlaylistList.appendChild(li)
-
+    console.log(sidebarPlaylistList.innerHTML);
     //SALVO LA PLAYLIST ALLA LOCALSTORAGE PER SIMULARE CHE L'HO SALVATO
     localStorage.setItem("sidebarPlaylistList", `${sidebarPlaylistList.innerHTML}`)
     
