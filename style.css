@@ -360,12 +360,11 @@ footer >div >div >div.progress >div{
 @media (max-width: 768px) {
   /*smartphone*/
 }
-<<<<<<< HEAD
+
 /****dropdownUtenti*****/
 #manageUser li{
   cursor: pointer;
-=======
-
+}
 #listaCanznoniArtista{
   list-style: none;
   padding: 0;
@@ -390,5 +389,4 @@ footer >div >div >div.progress >div{
     white-space: nowrap;
     text-overflow: ellipsis;
   }
->>>>>>> c2f02bcabb8db2036fe2ab2b869153be901679a1
 }
