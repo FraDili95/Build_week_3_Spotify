@@ -56,11 +56,16 @@
           Guest
         </div>
       </button>
-      <ul class="dropdown-menu">
+      <ul class="dropdown-menu" id="manageUser">
         <li><a class="dropdown-item" href="#">LogIn</a></li>
-        <li><a class="dropdown-item" href="#">LogOut</a></li>
+        <li><a class="dropdown-item out" href="#">LogOut</a></li>
         <li><a class="dropdown-item" href="#">Registrati</a></li>
       </ul>
+    </div>
+    <div class="d-flex flex-column d-none">
+      <div>Inserisci email: <input type="email" placeholder="email"></div>
+      <div>Inserisci pasword: <input type="password" placeholder="password"></div>
+      <button id="go">ok</button>
     </div>
 
     <!-- BOTTONE PER APRIRE LA SIDEBAR DI DESTRA -->

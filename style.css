@@ -360,3 +360,7 @@ footer >div >div >div.progress >div{
 @media (max-width: 768px) {
   /*smartphone*/
 }
+/****dropdownUtenti*****/
+#manageUser li{
+  cursor: pointer;
+}
