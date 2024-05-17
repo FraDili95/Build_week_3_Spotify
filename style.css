@@ -214,7 +214,7 @@ footer >div >div >div.progress >div{
 
 /* LAVORO SU PAGINA ARTISTA */
 .custom-jumbotron {
-  background-image: url('bw3/yellow3.webp');
+  
   background-size: cover;
   background-position: center;
   color: white;
@@ -268,4 +268,30 @@ footer >div >div >div.progress >div{
   background-color: rgb(217, 217, 217);
   scale: 1.01;
   cursor: pointer;
+}
+
+#listaCanznoniArtista{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media screen and (min-width: 1400px) {
+  #listaCanznoniArtista{
+    width: 800px;
+  }
+}
+
+.card-text{
+  cursor: pointer;
+}
+
+
+@media screen and (max-width: 768px) {
+  .prova{
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
