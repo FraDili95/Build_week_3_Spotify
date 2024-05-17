@@ -108,7 +108,7 @@ main{
   min-width: 130px;
 }
 
-#dropdown, #freccie{
+#dropdown, #freccie, #rightSidebarOpenerContainer{
   z-index: 10;
 }
 
