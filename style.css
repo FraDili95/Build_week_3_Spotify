@@ -386,3 +386,7 @@ footer >div >div >div.progress >div{
     text-overflow: ellipsis;
   }
 }
+
+#visualizzaAltro{
+  padding-bottom: 30px;
+}

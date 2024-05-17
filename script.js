@@ -303,7 +303,7 @@ function creaPaginaArtista(idArtistaFornitoci) {
                 </div>
             </li>
         </ul>
-        <button class="fw-bold fs-5 mt-5 ms-3 mb-5 btn text-white " id="visualizzaAltro">
+        <button class="fw-bold fs-5 ms-3 btn text-white " id="visualizzaAltro">
         VISUALIZZA ALTRO
         </button>
         `
