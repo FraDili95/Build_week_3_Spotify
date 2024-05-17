@@ -1,4 +1,5 @@
 //////////////////COSTANTI E VARIABILI GLOBALI///////////////////////////////////
+const BUTTON_HOME = document.getElementById("home");//puntatore al bottone home
 const numOfFavouritePunct = document.getElementsByClassName("num_song");//puntatori alle posizioni che indicano il numero dei preferiti
 const toFavourite = document.getElementsByClassName("favourites");//puntatori ai bottoni che portano ai preferiti
 const rightSidebarOpener = document.getElementById("rightSidebarOpener");//PUNTINI CHE APRONO LA SIDEBAR DI DESTRA
@@ -22,12 +23,15 @@ const paginaArtista = document.getElementById("paginaArtista");//PAGINA DEI RIUS
 const url = "http://striveschool-api.herokuapp.com/api/deezer/search?q=";
 var currentpage = 0;//PAGINA CORRENTE(la imposto a 0 all'inizio che corrisponde alla prima pagina)
 var currentFavourites = [];//array globale contenente i PREFERITI
+var onFavourite = false;
 ///////////////////////////////////////////////////////////////////////////////////
 
+
 function changePage ( arrayPages, direction ){//PER FARLA FUNZIONARE SERVE SOLO AGGIUNGERE LA CLASSE page AD OGNI PAGINA(e gli eventi ai bottoni)
+    
     const hideClassInCurrent = () => { arrayPages[currentpage].classList.add("d-none"); };
     let onFavourite = false;
-    // 1)nasconde pagina corrente
+    // 1)nasconde pagina corrente 
     // 2)definisce il comportamento della funzione in base al valore di direction(impostato durante la chiamata)
     if( direction == LEFT && currentpage > 0 ){// se LEFT e non sono a pag 0, scorre indietro
         hideClassInCurrent();
@@ -42,13 +46,14 @@ function changePage ( arrayPages, direction ){//PER FARLA FUNZIONARE SERVE SOLO 
             document.querySelector(".special_page").classList.remove("d-none");//mostro pagina preferiti
             document.getElementById("left").classList.add("d-none");//nascondo BOTTONE INDIETRO
             document.getElementById("right").classList.add("d-none");//nascondo BOTTONE AVANTI
-            document.getElementById("home").addEventListener("click", changePage(arrayPages, TO_FAVOURITE))
+            document.getElementById("home").addEventListener("click", changePage(arrayPages, TO_FAVOURITE)) 
         }else{
             onFavourite = false;//pagina preferiti spenta
             document.querySelector(".special_page").classList.add("d-none");//nascondo pagina preferiti
+            document.getElementById("left").classList.remove("d-none");//nascondo BOTTONE INDIETRO
+            document.getElementById("right").classList.remove("d-none");//nascondo BOTTONE AVANTI
             currentpage = 0;
             arrayPages[currentpage].classList.remove("d-none");
-            document.getElementById("home").removeEventListener("click", changePage(arrayPages, TO_FAVOURITE))
         }
 
     }else{
@@ -82,11 +87,12 @@ async function fetchAlbum(nomeArtista) {
     }
 }
 
+
 //CREO LA FUNZIONE PER GENERARE LE CARDS
 function createCards(risultati, container, addButton) {
     risultati.data.forEach(risultato => {
         console.log("RISULTATO",risultato);
-        console.log(risultato.album.tracklist);
+        console.log("TRACKLIST",risultato.album.tracklist);
         console.log(risultato.artist.tracklist);
         const col = document.createElement("div");
         col.classList.add("col-3");
@@ -103,10 +109,16 @@ function createCards(risultati, container, addButton) {
             <p class="text-white fs-5">${risultato.title}</p>
             <a class="card-text fw-bold" onclick="goPaginaArtista(${risultato.artist.id})">${risultato.artist.name}</a>
         </div>
+        <a class="d-none fetch_album ">${risultato.album.id}</a>
         </div>
         `
         // Aggiungo gli event listener subito dopo aver creato la carta(SOLO SE SPECIFICATO DURANTE LA CHIAMATA)
         if( addButton ){
+            col.querySelector('img').addEventListener("click", function(){
+                const prova = `https://api.deezer.com/album/${col.querySelector('.fetch_album').textContent}/tracks`;
+                console.log(prova);
+                console.log( fetchAlbumTraks(prova) );
+            })
             col.addEventListener('mouseenter', startHover);//evento entra il mouse
             col.addEventListener('mouseleave', endHover);//evento esce il mouseif( !(col.classList.contains("favourite")) ){//se non è già stato inserito nei preferiti
                 col.firstElementChild.firstElementChild.addEventListener("click", function(){
@@ -343,6 +355,14 @@ BUTTON_RIGHT.addEventListener("click",function(){ changePage(PAGES, RIGHT); } );
 Array.from(toFavourite).forEach(puntatore => {
     puntatore.addEventListener("click",function(){  changePage(PAGES, TO_FAVOURITE); } )//bottoni "alla pag preferiti"
 });
+BUTTON_HOME.addEventListener("click", function(){
+    if(onFavourite){
+        changePage(PAGES, TO_FAVOURITE);
+    }else{
+        currentpage = 1;
+        changePage(PAGES, LEFT);
+    }
+})
 //EVENTI PER FAR APPARIRE E SCOMPARIRE LA SIDEBAR DI DESTRA
 rightSidebarOpener.addEventListener("click", function openRightSidebar() {
     rightSidebar.classList.remove("d-none")
@@ -381,7 +401,7 @@ createPlaylistForm.addEventListener("submit", function creaPlaylist(e) {
     const li = document.createElement("li");
     li.innerText = nameCreatePlaylist.value ;
     sidebarPlaylistList.appendChild(li)
-
+    console.log(sidebarPlaylistList.innerHTML);
     //SALVO LA PLAYLIST ALLA LOCALSTORAGE PER SIMULARE CHE L'HO SALVATO
     localStorage.setItem("sidebarPlaylistList", `${sidebarPlaylistList.innerHTML}`)
 
@@ -390,5 +410,3 @@ createPlaylistForm.addEventListener("submit", function creaPlaylist(e) {
 
  //CREAIAMO LA VARIABILE DEL JUMBOTRON ARTISTA
  const customJumbotron=document.querySelector(".custom-jumbotron")
-
-
