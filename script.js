@@ -1,4 +1,7 @@
 //////////////////COSTANTI E VARIABILI GLOBALI///////////////////////////////////
+const URL_CUSTOM_USERS = "https://6644e82db8925626f8906753.mockapi.io/users/logIn";//URL API DEGLI UTENTI
+const dropdownUsersManage = document.getElementById("manageUser");//puntatore al dropdown
+const formLog_in = dropdownUsersManage.parentElement.nextElementSibling;
 const BUTTON_HOME = document.getElementById("home");//puntatore al bottone home
 const numOfFavouritePunct = document.getElementsByClassName("num_song");//puntatori alle posizioni che indicano il numero dei preferiti
 const toFavourite = document.getElementsByClassName("favourites");//puntatori ai bottoni che portano ai preferiti
@@ -24,8 +27,62 @@ const url = "http://striveschool-api.herokuapp.com/api/deezer/search?q=";
 var currentpage = 0;//PAGINA CORRENTE(la imposto a 0 all'inizio che corrisponde alla prima pagina)
 var currentFavourites = [];//array globale contenente i PREFERITI
 var onFavourite = false;
+var usersInMemory = [];
 ///////////////////////////////////////////////////////////////////////////////////
+////////////////////GESTIONE UTENTI///////////////////////////////////////////////
 
+     async function fetchGetUsers(URL) {
+    
+        //ESEGUO IL TRY..CATCH
+        try {
+            //Eseguo il fetch
+            const response = await fetch(URL);
+    
+            const risultati = await response.json()
+    
+            return risultati
+        } catch (error) {
+            //NAL CASO DI ERRORE LO SEGNALO
+            console.error("Errore:", error)
+        }
+    }
+
+    //estrae i dati dal form
+    function extractDataToForm( punctForm ){
+        const newObject = {
+            name: punctForm.firstElementChild.value,
+            password: punctForm.firstElementChild.nextElementSibling.value,
+        }
+        return newObject;
+    }
+    //cerca un riscontro tra gli utenti
+    function compareToLogIN( objectsUsers, objectX ){
+        for( let i=0; i<objectsUsers.length; i++){
+            if( objectsUsers[i].name === objectX.name ){
+                if( objectsUsers[i].password === objectX.password ){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    //click su login
+    dropdownUsersManage.firstElementChild.addEventListener("click", async function(){
+        dropdownUsersManage.parentElement.classList.toggle("d-none");
+        dropdownUsersManage.parentElement.nextElementSibling.classList.toggle("d-none");
+        const users = await fetchGetUsers(URL_CUSTOM_USERS);
+        usersInMemory = [];
+        usersInMemory.push(...users);
+    })
+    //click su invia login
+    formLog_in.lastElementChild.addEventListener("click", function(){
+        const result =  compareToLogIN( usersInMemory, extractDataToForm(formLog_in) );
+       console.log(result);
+       
+    })
+
+    
+/////////////////////////////////////////////////////////////////////////////////
 
 function changePage ( arrayPages, direction ){//PER FARLA FUNZIONARE SERVE SOLO AGGIUNGERE LA CLASSE page AD OGNI PAGINA(e gli eventi ai bottoni)
     
@@ -86,14 +143,30 @@ async function fetchAlbum(nomeArtista) {
         console.error("Errore:", error)
     }
 }
+// FETCH ALBUM tracks
+async function fetchAlbumTraks(url_new_API) {
+    try {
+        const response = await fetch(url_new_API,{
+
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const risultati = await response.json();
+        console.log("Fetch album tracks results:", risultati);
+        return risultati;
+    } catch (error) {
+        console.error("Errore:", error);
+    }
+}
 
 
 //CREO LA FUNZIONE PER GENERARE LE CARDS
 function createCards(risultati, container, addButton) {
     risultati.data.forEach(risultato => {
-        console.log("RISULTATO",risultato);
-        console.log("TRACKLIST",risultato.album.tracklist);
-        console.log(risultato.artist.tracklist);
+      //  console.log("RISULTATO",risultato);
+        //console.log("TRACKLIST",risultato.album.tracklist);
+        //console.log(risultato.artist.tracklist);
         const col = document.createElement("div");
         col.classList.add("col-3");
         //le 3 righe sotto il primo div sono quelle da aggiungere alla canzone per far apparire il bottone
@@ -109,13 +182,13 @@ function createCards(risultati, container, addButton) {
             <p class="text-white fs-5">${risultato.title}</p>
             <a class="card-text fw-bold" onclick="goPaginaArtista(${risultato.artist.id})">${risultato.artist.name}</a>
         </div>
-        <a class="d-none fetch_album ">${risultato.album.id}</a>
+        <a class="d-none fetch_album ">${risultato.artist.tracklist}</a>
         </div>
         `
         // Aggiungo gli event listener subito dopo aver creato la carta(SOLO SE SPECIFICATO DURANTE LA CHIAMATA)
         if( addButton ){
             col.querySelector('img').addEventListener("click", function(){
-                const prova = `https://api.deezer.com/album/${col.querySelector('.fetch_album').textContent}/tracks`;
+                const prova = col.querySelector(".fetch_album").textContent;
                 console.log(prova);
                 console.log( fetchAlbumTraks(prova) );
             })

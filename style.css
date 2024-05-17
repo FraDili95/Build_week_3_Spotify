@@ -361,6 +361,10 @@ footer >div >div >div.progress >div{
   /*smartphone*/
 }
 
+/****dropdownUtenti*****/
+#manageUser li{
+  cursor: pointer;
+}
 #listaCanznoniArtista{
   list-style: none;
   padding: 0;
