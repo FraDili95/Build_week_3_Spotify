@@ -19,6 +19,10 @@ const createPlaylist = document.getElementById("createPlaylist")//BOTTONE PER CR
 const sidebarPlaylistList = document.getElementById("sidebarPlaylistList")//CONTENITORE DELLE PLAYLIST
 const createPlaylistForm = document.getElementById("createPlaylistForm")//FORM PER CREARE LE PLAYLIST
 const nameCreatePlaylist = document.getElementById("nameCreatePlaylist")//input in cui si inserisce il nome della playlist che si vuole aggingere
+const defaultPage = document.getElementById("defaultPage");//PAGINA DI DEFAULT
+const researchPage = document.getElementById("researchPage");//PAGINA DEI RIUSLTATI DI RICERCA
+const paginaArtista = document.getElementById("paginaArtista");//PAGINA DEI RIUSLTATI DI RICERCA
+
 const url = "http://striveschool-api.herokuapp.com/api/deezer/search?q=";
 var currentpage = 0;//PAGINA CORRENTE(la imposto a 0 all'inizio che corrisponde alla prima pagina)
 var currentFavourites = [];//array globale contenente i PREFERITI
@@ -83,6 +87,7 @@ var usersInMemory = [];
 function changePage ( arrayPages, direction ){//PER FARLA FUNZIONARE SERVE SOLO AGGIUNGERE LA CLASSE page AD OGNI PAGINA(e gli eventi ai bottoni)
     
     const hideClassInCurrent = () => { arrayPages[currentpage].classList.add("d-none"); };
+    let onFavourite = false;
     // 1)nasconde pagina corrente 
     // 2)definisce il comportamento della funzione in base al valore di direction(impostato durante la chiamata)
     if( direction == LEFT && currentpage > 0 ){// se LEFT e non sono a pag 0, scorre indietro
@@ -98,6 +103,7 @@ function changePage ( arrayPages, direction ){//PER FARLA FUNZIONARE SERVE SOLO 
             document.querySelector(".special_page").classList.remove("d-none");//mostro pagina preferiti
             document.getElementById("left").classList.add("d-none");//nascondo BOTTONE INDIETRO
             document.getElementById("right").classList.add("d-none");//nascondo BOTTONE AVANTI
+            document.getElementById("home").addEventListener("click", changePage(arrayPages, TO_FAVOURITE)) 
         }else{
             onFavourite = false;//pagina preferiti spenta
             document.querySelector(".special_page").classList.add("d-none");//nascondo pagina preferiti
@@ -106,7 +112,7 @@ function changePage ( arrayPages, direction ){//PER FARLA FUNZIONARE SERVE SOLO 
             currentpage = 0;
             arrayPages[currentpage].classList.remove("d-none");
         }
-      
+
     }else{
         return false;
     }
@@ -123,7 +129,7 @@ function changePage ( arrayPages, direction ){//PER FARLA FUNZIONARE SERVE SOLO 
 
 //CREO LE FUNZIONE FETCH
 async function fetchAlbum(nomeArtista) {
-    
+
     //ESEGUO IL TRY..CATCH
     try {
         //Eseguo il fetch
@@ -174,7 +180,7 @@ function createCards(risultati, container, addButton) {
         <div class="card-body">
             <h5 class="card-title fw-bold text-white">${risultato.album.title}</h5>
             <p class="text-white fs-5">${risultato.title}</p>
-            <a class="card-text fw-bold">${risultato.artist.name}</a>
+            <a class="card-text fw-bold" onclick="goPaginaArtista(${risultato.artist.id})">${risultato.artist.name}</a>
         </div>
         <a class="d-none fetch_album ">${risultato.artist.tracklist}</a>
         </div>
@@ -204,11 +210,11 @@ function createCards(risultati, container, addButton) {
                             numOfFavouritePunct[i].textContent = `${currentFavourites.length}`;
                         }
                     }
-                  
-                })   
+
+                })
         }
-        
-        container.appendChild(col);    
+
+        container.appendChild(col);
 
     });
 }
@@ -222,7 +228,199 @@ function endHover(event) {
     const button = event.currentTarget.firstElementChild.firstElementChild;
     button.classList.add("d-none");
 }
- 
+
+//FUNZIONE DI PROVA
+function goPaginaArtista(idArtistaFornitoci) {
+    creaPaginaArtista(idArtistaFornitoci);
+    changePage(PAGES, RIGHT)
+}
+
+//FUNZIONE CHE GENERA LA PAGINA ARTISTA
+async function fetchArtista(idArtista) {
+
+    //ESEGUO IL TRY..CATCH
+    try {
+    //Eseguo il fetch
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/artist/${idArtista}/top?limit=50`);
+
+    const canzoniArtista = await response.json()
+
+    return canzoniArtista
+    } catch (error) {
+        //NAL CASO DI ERRORE LO SEGNALO
+        console.error("Errore:", error)
+    }
+}
+
+//FUNZIONE PER CONVERTIRE I SECONDI IN MINUTI E SECONDI
+function convertSecondsToMinutes(seconds) {
+    let minutes = Math.floor(seconds / 60); // Otteniamo il numero intero di minuti
+    let remainingSeconds = seconds % 60; // Otteniamo i secondi rimanenti
+
+    if (remainingSeconds < 10) {
+        remainingSeconds = `0${remainingSeconds}`
+    }
+
+    return `${minutes} : ${remainingSeconds}`;
+}
+
+//FUNZIONE PER CREARE/MODIFICARE LA PAGINA ARTISTA
+function creaPaginaArtista(idArtistaFornitoci) {
+    fetchArtista(idArtistaFornitoci).then((canzoniArtista) => {
+        console.log(canzoniArtista);
+        paginaArtista.innerHTML = '';
+        paginaArtista.innerHTML = `
+        <!-- JUMBOTRON-->
+        <div class="container-fluid py-5 custom-jumbotron mt-2" style="background-image: url('${canzoniArtista.data[0].album.cover_xl}');">
+          <div class="d-flex align-items-center ms-3 mt-5">
+            <i class="bi bi-patch-check-fill icon-blue"></i>
+            <p class="fs-4 mb-0 ms-2">Artista Verificato</p>
+          </div>
+          <h1 class="display-2 fw-bold ms-2">${canzoniArtista.data[0].artist.name}</h1>
+          <p class="fs-6 mb-0 ms-2">3.35342 Ascolti Mensili</p>
+        </div>
+
+        <!-- MAIN -->
+        <div class="d-flex gap-3 align-items-center ms-3">
+          <i class="bi bi-play-circle-fill icon-play"></i>
+          <button type="button" class="btn btn-outline-light">FOLLOWING</button>
+          <i class="bi bi-three-dots icon-dots"></i>
+        </div>
+        <h3 class="ms-3 mt-4 ">
+            Popolari
+        </h3>
+        <ul id="listaCanznoniArtista" class="d-flext flex-column flex-md-row align-items-center mt-5 ms-3">
+            <li class="container-fluid">
+                <div class="row mb-3">
+                    <div class="fs-5 col-1">1</div>
+                    <div class="col-1">
+                        <img src="${canzoniArtista.data[0].album.cover_small}" alt="copertina album">
+                    </div>
+                    <div class="col-4">
+                        ${canzoniArtista.data[0].title}
+                    </div>
+                    <div class=" col-4 col-lg-5">
+                        ${canzoniArtista.data[0].rank}
+                    </div>
+                    <div class="col-2 col-lg-1">
+                        ${convertSecondsToMinutes(canzoniArtista.data[0].duration)}
+                    </div>
+                </div>
+            </li>
+            <li class="container-fluid">
+                <div class="row mb-3">
+                    <div class="fs-5 col-1">2</div>
+                    <div class="col-1">
+                        <img src="${canzoniArtista.data[1].album.cover_small}" alt="copertina album">
+                    </div>
+                    <div class="col-4">
+                        ${canzoniArtista.data[1].title}
+                    </div>
+                    <div class=" col-4 col-lg-5">
+                        ${canzoniArtista.data[1].rank}
+                    </div>
+                    <div class="col-2 col-lg-1">
+                        ${convertSecondsToMinutes(canzoniArtista.data[1].duration)}
+                    </div>
+                </div>
+            </li>
+            <li class="container-fluid">
+                <div class="row mb-3">
+                    <div class="fs-5 col-1">3</div>
+                    <div class="col-1">
+                        <img src="${canzoniArtista.data[2].album.cover_small}" alt="copertina album">
+                    </div>
+                    <div class="col-4">
+                        ${canzoniArtista.data[2].title}
+                    </div>
+                    <div class=" col-4 col-lg-5">
+                        ${canzoniArtista.data[2].rank}
+                    </div>
+                    <div class="col-2 col-lg-1">
+                        ${convertSecondsToMinutes(canzoniArtista.data[2].duration)}
+                    </div>
+                </div>
+            </li>
+            <li class="container-fluid">
+                <div class="row mb-3">
+                    <div class="fs-5 col-1">4</div>
+                    <div class="col-1">
+                        <img src="${canzoniArtista.data[3].album.cover_small}" alt="copertina album">
+                    </div>
+                    <div class="col-4">
+                        ${canzoniArtista.data[3].title}
+                    </div>
+                    <div class=" col-4 col-lg-5">
+                        ${canzoniArtista.data[3].rank}
+                    </div>
+                    <div class="col-2 col-lg-1">
+                        ${convertSecondsToMinutes(canzoniArtista.data[3].duration)}
+                    </div>
+                </div>
+            </li>
+            <li class="container-fluid">
+                <div class="row mb-3">
+                    <div class="fs-5 col-1">5</div>
+                    <div class="col-1">
+                        <img src="${canzoniArtista.data[4].album.cover_small}" alt="copertina album">
+                    </div>
+                    <div class="col-4">
+                        ${canzoniArtista.data[4].title}
+                    </div>
+                    <div class=" col-4 col-lg-5">
+                        ${canzoniArtista.data[4].rank}
+                    </div>
+                    <div class="col-2 col-lg-1">
+                        ${convertSecondsToMinutes(canzoniArtista.data[4].duration)}
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <button class="fw-bold fs-5 mt-5 ms-3 mb-5 btn text-white " id="visualizzaAltro">
+        VISUALIZZA ALTRO
+        </button>
+        `
+        const visualizzaAltro = document.getElementById("visualizzaAltro");//BOTTONE PER VISUALIZZARE ALTRE CANZONI DELL'ARTISTA
+        const listaCanznoniArtista = document.getElementById("listaCanznoniArtista");//LISTA CANZONI DELLA PAGINA ARTISTA
+
+        //CREO LA FUNZIONE PER VISUALIZZARE ALTRO AL CLICK DEL BOTTONE
+        visualizzaAltro.addEventListener("click", function visualiizzaAltroFunzione() {
+            if (visualizzaAltro.classList.contains("visualizzato")) {
+                visualizzaAltro.textContent = "VISUALIZZA ALTRO";
+                visualizzaAltro.classList.remove("visualizzato")
+                for (let i = 5; i < canzoniArtista.data.length; i++) {
+                    listaCanznoniArtista.removeChild(listaCanznoniArtista.lastChild)
+                }
+            } else {
+                for (let i = 5; i < canzoniArtista.data.length; i++) {
+                    const li = document.createElement("li");
+                    li.classList.add("container-fluid" , "mb-3");
+                    li.innerHTML =
+                    `
+                    <div class="row">
+                        <div class="fs-5 col-1">${i+1}</div>
+                        <div class="col-1">
+                            <img src="${canzoniArtista.data[i].album.cover_small}" alt="copertina album">
+                        </div>
+                        <div class="col-4 prova">
+                            ${canzoniArtista.data[i].title}
+                        </div>
+                        <div class=" col-4 col-lg-5">
+                            ${canzoniArtista.data[i].rank}
+                        </div>
+                        <div class="col-2 col-lg-1">
+                            ${convertSecondsToMinutes(canzoniArtista.data[i].duration)}
+                        </div>
+                    </div>
+                    `;
+                    listaCanznoniArtista.appendChild(li);
+                }
+                visualizzaAltro.classList.add("visualizzato")
+                visualizzaAltro.textContent = "RIDUCI";
+            }
+        })
+    }) 
+}
 
 ////////////////////////////////EVENT LISTENERS///////////////////////////////////
 BUTTON_LEFT.addEventListener("click",function(){  changePage(PAGES, LEFT); } );//bottone sx
@@ -244,7 +442,7 @@ rightSidebarOpener.addEventListener("click", function openRightSidebar() {
     rightSidebarOpener.classList.add("d-none")
     customJumbotron.style.width="67vw"
 })
-  
+
 rightSidebarCloser.addEventListener("click", function openRightSidebar() {
     rightSidebar.classList.add("d-none")
     rightSidebarOpener.classList.remove("d-none")
@@ -259,7 +457,7 @@ document.addEventListener("DOMContentLoaded", function caricamento() {
     fetchAlbum("sum41").then(risultati => {
         createCards(risultati, sum41Container, true)
     })
- 
+
     //CARICO LE PLAYLIST SALVATE NEL LOCAL STORAGE
     sidebarPlaylistList.innerHTML =
     `
@@ -279,59 +477,9 @@ createPlaylistForm.addEventListener("submit", function creaPlaylist(e) {
     console.log(sidebarPlaylistList.innerHTML);
     //SALVO LA PLAYLIST ALLA LOCALSTORAGE PER SIMULARE CHE L'HO SALVATO
     localStorage.setItem("sidebarPlaylistList", `${sidebarPlaylistList.innerHTML}`)
-    
+
     nameCreatePlaylist.value = '';
 })
 
  //CREAIAMO LA VARIABILE DEL JUMBOTRON ARTISTA
  const customJumbotron=document.querySelector(".custom-jumbotron")
-
- /*JS mihajlo */
- /* Aggiungo .addEventListener a window per gestire il responsive*/
-window.addEventListener('resize', function(){
-    // Scrivo una variabile per la larghezza dello schermo
-    let width = window.innerWidth;
-    let tableTracks = document.querySelector('.table-tracks');
-    let tableContainer = document.getElementById('table-container');
-    
-    // Se lo schermo è di grandi dimensioni
-    if(width >= 992) {
-        tableTracks.style.display = 'table';
-        tableTracks.style.animation = 'shrinkLG 1s forwards';
-    }
-    // Se lo schermo è di medie dimensioni
-    else if(width > 767 && width < 992) {
-        tableTracks.style.display = 'table';
-        tableTracks.style.animation = 'shrinkMD 1s forwards';
-    }
-    // Se lo schermo è di piccole dimensioni
-    else if(width <= 767) {
-        tableTracks.style.display = 'none';
-        tableContainer.innerHTML = 
-        `
-        <div class="sm-track-list">
-            <div class="sm-container-track-list">
-                <button type="button" class="sm-btn-track-list">
-                    First button
-                    <small>first button</small>
-                </button>
-                <span><i class="bi bi-three-dots-vertical"></i></span>
-            </div>
-            <div>
-                <button type="button" class="sm-btn-track-list">
-                    First button
-                    <small>first button</small>
-                </button>
-                <span><i class="bi bi-three-dots-vertical"></i></span>
-            </div>
-            <div>
-                <button type="button" class="sm-btn-track-list">
-                    First button
-                    <small>first button</small>
-                </button>
-                <span><i class="bi bi-three-dots-vertical"></i></span>
-            </div>
-        </div>
-        `;
-    }
-})

@@ -108,7 +108,7 @@ main{
   min-width: 130px;
 }
 
-#dropdown, #freccie{
+#dropdown, #freccie, #rightSidebarOpenerContainer{
   z-index: 10;
 }
 
@@ -214,7 +214,7 @@ footer >div >div >div.progress >div{
 
 /* LAVORO SU PAGINA ARTISTA */
 .custom-jumbotron {
-  background-image: url('bw3/yellow3.webp');
+  
   background-size: cover;
   background-position: center;
   color: white;
@@ -360,7 +360,35 @@ footer >div >div >div.progress >div{
 @media (max-width: 768px) {
   /*smartphone*/
 }
+<<<<<<< HEAD
 /****dropdownUtenti*****/
 #manageUser li{
   cursor: pointer;
+=======
+
+#listaCanznoniArtista{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media screen and (min-width: 1400px) {
+  #listaCanznoniArtista{
+    width: 800px;
+  }
+}
+
+.card-text{
+  cursor: pointer;
+}
+
+
+@media screen and (max-width: 768px) {
+  .prova{
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+>>>>>>> c2f02bcabb8db2036fe2ab2b869153be901679a1
 }
