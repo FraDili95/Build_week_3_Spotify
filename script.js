@@ -21,7 +21,10 @@ var currentpage = 0;//PAGINA CORRENTE(la imposto a 0 all'inizio che corrisponde 
 var currentFavourites = [];//array globale contenente i PREFERITI
 var onFavourite = false;
 ///////////////////////////////////////////////////////////////////////////////////
-
+fetch("https://6644e82db8925626f8906753.mockapi.io/users/logIn")
+.then( data => data.json())
+.then( data => console.log("",data))
+.catch( error => console.error(error))
 
 function changePage ( arrayPages, direction ){//PER FARLA FUNZIONARE SERVE SOLO AGGIUNGERE LA CLASSE page AD OGNI PAGINA(e gli eventi ai bottoni)
     
@@ -84,9 +87,7 @@ async function fetchAlbum(nomeArtista) {
 async function fetchAlbumTraks(url_new_API) {
     try {
         const response = await fetch(url_new_API,{
-            method: 'GET',
-            mode:'no-cors',
-            headers: { 'Content-Type': 'application/json' }
+
         });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -104,8 +105,8 @@ async function fetchAlbumTraks(url_new_API) {
 function createCards(risultati, container, addButton) {
     risultati.data.forEach(risultato => {
         console.log("RISULTATO",risultato);
-        console.log("TRACKLIST",risultato.album.tracklist);
-        console.log(risultato.artist.tracklist);
+        //console.log("TRACKLIST",risultato.album.tracklist);
+        //console.log(risultato.artist.tracklist);
         const col = document.createElement("div");
         col.classList.add("col-3");
         //le 3 righe sotto il primo div sono quelle da aggiungere alla canzone per far apparire il bottone
@@ -121,13 +122,13 @@ function createCards(risultati, container, addButton) {
             <p class="text-white fs-5">${risultato.title}</p>
             <a class="card-text fw-bold">${risultato.artist.name}</a>
         </div>
-        <a class="d-none fetch_album ">${risultato.album.id}</a>
+        <a class="d-none fetch_album ">${risultato.artist.tracklist}</a>
         </div>
         `
         // Aggiungo gli event listener subito dopo aver creato la carta(SOLO SE SPECIFICATO DURANTE LA CHIAMATA)
         if( addButton ){
             col.querySelector('img').addEventListener("click", function(){
-                const prova = `https://api.deezer.com/album/${col.querySelector('.fetch_album').textContent}/tracks`;
+                const prova = col.querySelector(".fetch_album").textContent;
                 console.log(prova);
                 console.log( fetchAlbumTraks(prova) );
             })
